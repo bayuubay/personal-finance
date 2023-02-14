@@ -23,9 +23,8 @@ export class BalancesService {
   }
 
   async createBalance(createBalanceDto: CreateBalanceDto): Promise<Balance>{
-    const {id, ammount, created_at, updated_at} = createBalanceDto
+    const {ammount} = createBalanceDto
     const payload = {
-      id,
       ammount,
       created_at: new Date(),
       updated_at: new Date(),
@@ -47,6 +46,7 @@ export class BalancesService {
     const {ammount} = updatebalanceDto
     if(balance){
       balance.ammount += ammount
+      balance.updated_at = new Date()
       await this.balanceRepository.save(balance)
     }
   }
