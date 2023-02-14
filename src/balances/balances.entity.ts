@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Transaction } from "src/transactions/transaction.entity";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Balance extends BaseEntity {
@@ -13,4 +14,7 @@ export class Balance extends BaseEntity {
 
   @Column()
   updated_at: Date
+
+  @OneToMany(_type => Transaction, transaction => transaction.balance, {eager: true})
+  transaction: Transaction[]
 }

@@ -3,6 +3,7 @@ import { Balance } from './balances.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBalanceDto } from './dto/create-balance.dto';
 import { Repository } from 'typeorm';
+import { UpdateBalanceDto } from './dto/update-balance.dto';
 
 @Injectable()
 export class BalancesService {
@@ -12,10 +13,8 @@ export class BalancesService {
     private balanceRepository: Repository<Balance>){}
 
   async getAllBalance(): Promise<Balance[]>{
-    console.log(this.balanceRepository);
     
     const list = await this.balanceRepository.find()
-    console.log(list);
     
     if(!list){
       return []
@@ -35,5 +34,20 @@ export class BalancesService {
     await this.balanceRepository.save(data)
 
     return data
+  }
+
+  async getBalanceById(balanceId: string):Promise<Balance>{
+    const data = await this.balanceRepository.findOne({where: {id: balanceId}})
+    if(!data)return null
+    return data
+  }
+
+  async updateBalance(updatebalanceDto: UpdateBalanceDto, id: string): Promise<void>{
+    const balance = await this.balanceRepository.findOne({where: {id}})
+    const {ammount} = updatebalanceDto
+    if(balance){
+      balance.ammount += ammount
+      await this.balanceRepository.save(balance)
+    }
   }
 }
