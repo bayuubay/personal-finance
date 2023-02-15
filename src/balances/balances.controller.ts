@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { BalancesService } from './balances.service';
 import { CreateBalanceDto } from './dto/create-balance.dto';
 import { ApiResponse } from '@nestjs/swagger';
@@ -13,6 +13,17 @@ export class BalancesController {
   @ApiResponse({status: 200, description: 'Success', type: CreateBalanceDto})
   async getAllBalance(){
     const data = await this.balanceService.getAllBalance()
+    return {
+      data,
+      statusCode: 200,
+      message: 'Success'
+    }
+  }
+
+  @Get('/:id')
+  @ApiResponse({status: 200, description: 'Success'})
+  async getBalanceById(@Param('id') balanceId: string){
+    const data = await this.balanceService.getBalanceById(balanceId)
     return {
       data,
       statusCode: 200,

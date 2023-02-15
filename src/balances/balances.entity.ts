@@ -7,13 +7,13 @@ export class Balance extends BaseEntity {
   id: string;
 
   @Column()
-  ammount: number
+  ammount: number = 0
 
   @Column()
-  created_at: Date
+  created_at: Date = new Date()
 
   @Column()
-  updated_at: Date
+  updated_at: Date = new Date()
 
   @OneToMany(_type => Transaction, transaction => transaction.balance, {eager: true})
   transaction: Transaction[]

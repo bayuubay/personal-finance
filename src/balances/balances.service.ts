@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Balance } from './balances.entity'; 
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBalanceDto } from './dto/create-balance.dto';
@@ -24,6 +24,9 @@ export class BalancesService {
 
   async createBalance(createBalanceDto: CreateBalanceDto): Promise<Balance>{
     const {ammount} = createBalanceDto
+    if(!ammount){
+      throw new BadRequestException('Ammount is required')
+    }
     const payload = {
       ammount,
       created_at: new Date(),
@@ -37,12 +40,14 @@ export class BalancesService {
 
   async getBalanceById(balanceId: string):Promise<Balance>{
     const data = await this.balanceRepository.findOne({where: {id: balanceId}})
-    if(!data)return null
+    if(!data){
+      throw new NotFoundException('Balance Data Not Found')
+    }
     return data
   }
 
   async updateBalance(updatebalanceDto: UpdateBalanceDto, id: string): Promise<void>{
-    const balance = await this.balanceRepository.findOne({where: {id}})
+    const balance = await this.getBalanceById(id)
     const {ammount} = updatebalanceDto
     if(balance){
       balance.ammount += ammount
