@@ -1,6 +1,15 @@
 # personal-finance
 Personal Finance API
 
+# Issue description
+Create a simple web service to track balance, income and expenses.
+- Database: SQLite.
+- Decide yourself what endpoints and tables are needed.
+- Add Test Cases for each endpoint.
+- Add API documentation ( Swagger ) ( Optional ).
+- Frameworks ( Express, NestJS ).
+- Give all your best!
+
 # How to run app
 
 1. fork the project
