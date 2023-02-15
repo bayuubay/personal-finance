@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { BalancesService } from './balances.service';
 import { CreateBalanceDto } from './dto/create-balance.dto';
 import { ApiResponse } from '@nestjs/swagger';
+import { BalanceResponse } from './response/balances.response';
 
 @Controller('balances')
 export class BalancesController {
@@ -21,7 +22,7 @@ export class BalancesController {
   }
 
   @Get('/:id')
-  @ApiResponse({status: 200, description: 'Success'})
+  @ApiResponse({status: 200, description: 'Success', type: BalanceResponse})
   async getBalanceById(@Param('id') balanceId: string){
     const data = await this.balanceService.getBalanceById(balanceId)
     return {
@@ -32,7 +33,7 @@ export class BalancesController {
   }
 
   @Post()
-  @ApiResponse({status: 201, description: 'Success'})
+  @ApiResponse({status: 201, description: 'Success', type: BalanceResponse})
   async createBalance(@Body() createBalanceDto: CreateBalanceDto){
     return await this.balanceService.createBalance(createBalanceDto)
   }
