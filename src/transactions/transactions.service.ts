@@ -4,8 +4,7 @@ import { Transaction } from './transaction.entity';
 import { Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { TransactionType } from './transaction-type.enum';
-import { BalancesService } from 'src/balances/balances.service';
-import { Balance } from 'src/balances/balances.entity';
+import { BalancesService } from '../balances/balances.service';
 
 @Injectable()
 export class TransactionsService {

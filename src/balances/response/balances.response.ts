@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common"
 import { ApiProperty } from "@nestjs/swagger"
-import { Transaction } from "src/transactions/transaction.entity"
+import { Transaction } from "../../transactions/transaction.entity"
 
 @Injectable()
 export class BalanceResponse {

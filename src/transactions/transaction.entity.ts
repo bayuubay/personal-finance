@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TransactionType } from "./transaction-type.enum";
-import { Balance } from "src/balances/balances.entity";
+import { Balance } from "../balances/balances.entity";
 
 @Entity()
 export class Transaction extends BaseEntity{
