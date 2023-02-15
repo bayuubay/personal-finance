@@ -1,4 +1,4 @@
-import { Controller, Param, Post, Body } from '@nestjs/common';
+import { Controller, Param, Post, Body, Get } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 
@@ -13,8 +13,18 @@ export class TransactionsController {
     const data = await this.transactionService.createTransaction(createTransactionDto, balanceId)
     return{
       data,
-      statusCode: 200,
+      statusCode: 201,
       message:'Success'
+    }
+  }
+
+  @Get('/:balance_id')
+  async getTransactionByBalanceId(@Param('balance_id') balanceId: string){
+    const data = await this.transactionService.getTransactionByBalanceId(balanceId)
+    return {
+      data,
+      statusCode: 200,
+      message: 'Success'
     }
   }
 }

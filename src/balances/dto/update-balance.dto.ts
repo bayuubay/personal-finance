@@ -1,8 +1,8 @@
 import { Transform } from "class-transformer";
-import { IsDate, IsNumber } from "class-validator";
+import { IsDate, IsNotEmpty, IsNumber } from "class-validator";
 
 export class UpdateBalanceDto {
-  @Transform(({value}) => parseInt(value))
+  @IsNotEmpty()
   @IsNumber()
   ammount: number
 }

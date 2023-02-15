@@ -3,6 +3,7 @@ import { BalancesController } from './balances.controller';
 import { BalancesService } from './balances.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Balance } from './balances.entity';
+import { BalanceResponse } from './response/balances.response';
 
 @Module({
   controllers: [BalancesController],
